@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stabilité des atomes et modèle de Lewis – Résumé de cours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#14213d;--muted:#55607a;--line:#d6dcea;--blue:#0b5fc0;--pink:#b8135f;--tint:#e8f0fc;--ok:#17724a;--okbg:#e2f5ea;--bad:#a82a22;--badbg:#fbe7e5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1525;--card:#172036;--ink:#e8ecf6;--muted:#a3adc6;--line:#2c3856;--blue:#6aa8ff;--pink:#ff7ab8;--tint:#1d2c4d;--ok:#6fdca2;--okbg:#14382a;--bad:#ff9a92;--badbg:#44201e}}
+:root[data-theme="dark"]{--bg:#0e1525;--card:#172036;--ink:#e8ecf6;--muted:#a3adc6;--line:#2c3856;--blue:#6aa8ff;--pink:#ff7ab8;--tint:#1d2c4d;--ok:#6fdca2;--okbg:#14382a;--bad:#ff9a92;--badbg:#44201e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);color:var(--pink)}
+h2{font-size:1.6rem;color:var(--pink);margin-top:0}
+h3{font-size:1.1rem;color:var(--blue)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px 12px}
+nav a{white-space:nowrap;padding:6px 12px;border-radius:999px;color:var(--ink);text-decoration:none;font-size:.95rem}
+nav a:hover,nav a:focus-visible{background:var(--tint);outline:none}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+header{padding:20px 0 8px}
+header p{color:var(--muted);max-width:60ch}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin:22px 0}
+.key{background:var(--tint);border-left:4px solid var(--blue);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.box{border:1px solid var(--line);border-radius:10px;padding:14px}
+sup{font-size:.7em}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+th{background:var(--tint)}
+.scroll{overflow-x:auto}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+/* mini tableau */
+.pt{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;max-width:520px;margin:10px 0}
+.pt button{aspect-ratio:1;border:1px solid var(--line);background:var(--card);border-radius:8px;font-weight:700;font-size:1rem;padding:0;position:relative}
+.pt button small{position:absolute;top:2px;left:4px;font-weight:400;font-size:.62rem;color:var(--muted)}
+.pt button[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pt button[data-f="alc"]{border-bottom:4px solid #d98a00}.pt button[data-f="hal"]{border-bottom:4px solid #0a9b8a}.pt button[data-f="nob"]{border-bottom:4px solid #7a4fd6}
+.legend{font-size:.85rem;color:var(--muted)}
+.panel{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:10px}
+@media(max-width:560px){.panel{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.panel svg{width:130px;height:130px;color:var(--ink)}
+.panel dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.panel dt{color:var(--muted)}.panel dd{margin:0;font-weight:600}
+/* quiz */
+.quiz{margin-top:18px;border-top:2px dashed var(--line);padding-top:14px}
+.q{margin:14px 0}
+.q p{margin:0 0 6px;font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 12px}
+.opts button:hover:not(:disabled){border-color:var(--blue)}
+.opts button.ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opts button.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.exp{font-size:.92rem;color:var(--muted);margin-top:6px}
+.score{font-weight:700;color:var(--blue)}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:10px}
+.links a{display:block;border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink);background:var(--card)}
+.links a:hover{border-color:var(--blue)}
+.links a span{display:block;font-size:.8rem;color:var(--blue)}
+ol.steps li{margin:4px 0}
+.theme{float:right;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:4px 10px;font-size:.85rem}
+</style>
+</head>
+<body>
+<nav aria-label="Sommaire">
+<a href="#stabilite">Stabilité</a><a href="#ions">Ions</a><a href="#molecules">Molécules</a><a href="#lewis">Modèle de Lewis</a><a href="#videos">Vidéos</a>
+</nav>
+<main>
+<header>
+<button class="theme" id="themeBtn" type="button">Mode clair / sombre</button>
+<h1>La stabilité des atomes et le modèle de Lewis</h1>
+<p>Résumé de cours de Seconde. Clique sur un élément du tableau pour voir sa structure, puis teste-toi avec les quiz de chaque partie.</p>
+</header>
+
+<section id="explorer" aria-labelledby="exH">
+<h2 id="exH">Explorateur : choisis un atome</h2>
+<p>Les 18 premiers éléments, rangés par ligne (période) et par famille. Le trait de couleur sous la case indique la famille : <span style="color:#d98a00">alcalins</span>, <span style="color:#0a9b8a">halogènes</span>, <span style="color:#7a4fd6">gaz nobles</span>.</p>
+<div class="pt" id="pt" role="group" aria-label="Tableau périodique simplifié"></div>
+<div class="panel" id="panel" aria-live="polite"></div>
+</section>
+
+<section id="stabilite">
+<h2>1. Pourquoi les atomes cherchent la stabilité</h2>
+<p>Les gaz nobles (He, Ne, Ar…) n'existent sur Terre que sous forme d'atomes isolés : ils ne réagissent pas. Leur <b>couche externe est saturée</b>, ils sont stables.</p>
+<div class="cols">
+<div class="box"><h3>Règle du duet</h3><p>Pour H, He, Li, Be : la couche externe est saturée avec <b>2 électrons</b> (comme l'hélium).</p></div>
+<div class="box"><h3>Règle de l'octet</h3><p>Pour les atomes de Z = 5 à 18 : la couche externe est saturée avec <b>8 électrons</b> (comme Ne et Ar).</p></div>
+</div>
+<div class="key">Les autres atomes cherchent à ressembler à un gaz noble. Ils ont <b>2 solutions</b> : former des <b>ions monoatomiques</b> ou former des <b>liaisons covalentes</b> avec d'autres atomes.</div>
+<div class="quiz" id="quiz-stab"></div>
+</section>
+
+<section id="ions">
+<h2>2. Solution n°1 : former un ion monoatomique</h2>
+<p>L'atome gagne ou perd des électrons pour obtenir la configuration du gaz noble le plus proche. Son noyau ne change pas : seul le nombre d'électrons change.</p>
+<div class="cols">
+<div class="box"><h3>Cation (charge +)</h3><p>Atome qui a <b>perdu</b> des électrons. Cas des atomes à 1, 2 ou 3 électrons de valence.</p><p>Na → Na<sup>+</sup> + e<sup>−</sup><br>Mg → Mg<sup>2+</sup> + 2 e<sup>−</sup><br>Al → Al<sup>3+</sup> + 3 e<sup>−</sup></p></div>
+<div class="box"><h3>Anion (charge −)</h3><p>Atome qui a <b>gagné</b> des électrons. Cas des atomes à 5, 6 ou 7 électrons de valence.</p><p>Cl + e<sup>−</sup> → Cl<sup>−</sup><br>O + 2 e<sup>−</sup> → O<sup>2−</sup><br>N + 3 e<sup>−</sup> → N<sup>3−</sup></p></div>
+</div>
+<div class="key"><b>Astuce :</b> un atome à v électrons de valence perd v électrons si v ≤ 3, et gagne (8 − v) électrons si v ≥ 5. Avec v = 4 (C, Si), il forme plutôt des liaisons. L'ion obtenu a la configuration du gaz noble voisin : Na<sup>+</sup> et F<sup>−</sup> ressemblent à Ne.</div>
+<h3>Entraîne-toi : trouve l'ion</h3>
+<p>Choisis un élément, trouve son ion, puis vérifie.</p>
+<div id="ionTrain"></div>
+<div class="quiz" id="quiz-ions"></div>
+</section>
+
+<section id="molecules">
+<h2>3. Solution n°2 : former des liaisons covalentes</h2>
+<p>Deux atomes <b>mettent en commun</b> un électron chacun : cela forme un <b>doublet liant</b> (2 électrons partagés), représenté par un tiret. Chaque atome complète ainsi sa couche externe (duet ou octet).</p>
+<div class="key">Nombre de liaisons formées par un atome : <b>8 − v</b> (octet) ou <b>2 − v</b> pour H (duet). Les électrons de valence restants forment des <b>doublets non liants</b>.</div>
+<div class="scroll"><table>
+<caption style="text-align:left;color:var(--muted);padding-bottom:6px">Valeurs à retenir</caption>
+<tr><th>Atome</th><th>H</th><th>C</th><th>N</th><th>O</th><th>F, Cl</th></tr>
+<tr><td>Électrons de valence</td><td>1</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+<tr><td>Liaisons covalentes</td><td>1</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+<tr><td>Doublets non liants</td><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+</table></div>
+<h3>Exemples de molécules</h3>
+<div class="scroll"><table>
+<tr><th>Molécule</th><th>Électrons de valence au total</th><th>Description de Lewis</th></tr>
+<tr><td>H<sub>2</sub>O</td><td>2×1 + 6 = 8</td><td>O central : 2 liaisons simples avec H, 2 doublets non liants</td></tr>
+<tr><td>NH<sub>3</sub></td><td>3×1 + 5 = 8</td><td>N central : 3 liaisons simples avec H, 1 doublet non liant</td></tr>
+<tr><td>CH<sub>4</sub></td><td>4×1 + 4 = 8</td><td>C central : 4 liaisons simples avec H, aucun doublet non liant</td></tr>
+<tr><td>HCl</td><td>1 + 7 = 8</td><td>1 liaison H–Cl, 3 doublets non liants sur Cl</td></tr>
+<tr><td>CO<sub>2</sub></td><td>4 + 2×6 = 16</td><td>O=C=O : 2 liaisons doubles, 2 doublets non liants sur chaque O</td></tr>
+<tr><td>N<sub>2</sub></td><td>2×5 = 10</td><td>N≡N : 1 liaison triple, 1 doublet non liant sur chaque N</td></tr>
+</table></div>
+<div class="quiz" id="quiz-mol"></div>
+</section>
+
+<section id="lewis">
+<h2>4. Écrire un schéma de Lewis</h2>
+<h3>Pour un atome</h3>
+<p>Le symbole représente le noyau et les couches internes. Les électrons de valence sont placés autour : un <b>point</b> pour un électron célibataire, un <b>tiret</b> pour un doublet.</p>
+<ul>
+<li>Jusqu'à 4 électrons de valence : tous sont <b>célibataires</b>, répartis sur les 4 côtés.</li>
+<li>Au-delà de 4 : les électrons supplémentaires s'ajoutent aux célibataires pour former des <b>doublets</b>.</li>
+</ul>
+<p>Exemple : l'azote (5 électrons de valence, 2s<sup>2</sup>2p<sup>3</sup>) a 3 électrons célibataires, donc 3 liaisons possibles, et 1 doublet non liant. Clique sur N dans l'explorateur pour le voir.</p>
+<h3>Pour une molécule : méthode en 5 étapes</h3>
+<ol class="steps">
+<li>Écrire la configuration électronique de chaque atome et compter ses électrons de valence.</li>
+<li>Trouver le nombre de liaisons de chaque atome (8 − v, ou 2 − v pour H).</li>
+<li>Placer l'atome qui fait le plus de liaisons au centre et tracer les liaisons.</li>
+<li>Ajouter les doublets non liants pour compléter chaque atome.</li>
+<li>Vérifier : duet pour H, octet pour les autres, et le total d'électrons de valence respecté.</li>
+</ol>
+<div class="key"><b>Exemple H<sub>2</sub>O.</b> H : 1s<sup>1</sup>, 1 électron de valence, 1 liaison. O : 1s<sup>2</sup>2s<sup>2</sup>2p<sup>4</sup>, 6 électrons de valence, 2 liaisons. O au centre avec 2 liaisons O–H, puis 2 doublets non liants sur O. Vérification : 8 électrons autour de O, 2 autour de chaque H.</div>
+<div class="quiz" id="quiz-lewis"></div>
+</section>
+
+<section id="videos">
+<h2>Pour réviser : les vidéos du cours</h2>
+<div class="links">
+<a href="https://ladigitale.dev/digiview/#/v/2750addbd44055e2" target="_blank" rel="noopener noreferrer"><span>Révisions</span>Structure électronique des atomes</a>
+<a href="https://ladigitale.dev/digiview/#/v/87aecab454b5d50b" target="_blank" rel="noopener noreferrer"><span>Révisions</span>Structure électronique des ions</a>
+<a href="https://ladigitale.dev/digiview/#/v/78ce4e1e269d5187" target="_blank" rel="noopener noreferrer"><span>Révisions</span>Modèle de Lewis</a>
+<a href="https://ladigitale.dev/digiview/#/v/7e8cbd629f2d37fb" target="_blank" rel="noopener noreferrer"><span>Révisions</span>Règle du duet et de l'octet</a>
+<a href="https://ladigitale.dev/digiview/#/v/a002a2254de7375a" target="_blank" rel="noopener noreferrer"><span>Exercices</span>Écriture d'un modèle de Lewis</a>
+<a href="https://ladigitale.dev/digiview/#/v/bd94d6e97ed2a90e" target="_blank" rel="noopener noreferrer"><span>Exercice supplémentaire</span>Lewis de la molécule de chloroforme</a>
+<a href="https://ladigitale.dev/digiview/#/v/76f4604e42f6aebf" target="_blank" rel="noopener noreferrer"><span>Cours</span>Tableau périodique et familles</a>
+</div>
+</section>
+</main>
+
+<script>
+const S=["H","He","Li","Be","B","C","N","O","F","Ne","Na","Mg","Al","Si","P","S","Cl","Ar"];
+const sup=n=>String(n).replace(/\d/g,d=>"⁰¹²³⁴⁵⁶⁷⁸⁹"[d]);
+function conf(e){const sub=[["1s",2],["2s",2],["2p",6],["3s",2],["3p",6]];let r=e,o=[];for(const[n,m]of sub){if(r<=0)break;const k=Math.min(r,m);o.push([n,k]);r-=k}return o}
+const confTxt=e=>e<=0?"aucun électron":conf(e).map(([n,k])=>n+sup(k)).join(" ");
+function valence(Z){const c=conf(Z),mx=Math.max(...c.map(x=>+x[0][0]));return c.filter(x=>+x[0][0]===mx).reduce((a,x)=>a+x[1],0)}
+function ion(Z){const v=valence(Z),s=S[Z-1];
+ if([2,10,18].includes(Z))return null;
+ if(Z===1)return{q:1,f:"H<sup>+</sup>"};
+ if(v<=3)return{q:v,f:s+"<sup>"+(v>1?v:"")+"+</sup>"};
+ if(v>=5){const g=8-v;return{q:-g,f:s+"<sup>"+(g>1?g:"")+"−</sup>"}}
+ return null}
+function fam(Z){return[3,11].includes(Z)?"alc":[9,17].includes(Z)?"hal":[2,10,18].includes(Z)?"nob":""}
+function lewis(Z){const v=valence(Z),s=S[Z-1];let c=[0,0,0,0];
+ if(Z===2)c[0]=2;else for(let i=0;i<v;i++)c[i%4]++;
+ let g=`<svg viewBox="0 0 100 100" role="img" aria-label="Schéma de Lewis de ${s} : ${v} électron(s) de valence"><text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-size="30" font-weight="700" fill="currentColor" font-family="system-ui,sans-serif">${s}</text>`;
+ const P=[[50,18,1,0],[82,50,0,1],[50,82,1,0],[18,50,0,1]];
+ c.forEach((n,i)=>{const[x,y,h]=P[i];if(n===1)g+=`<circle cx="${x}" cy="${y}" r="3.5" fill="currentColor"/>`;
+  if(n===2)g+=h?`<line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>`:`<line x1="${x}" y1="${y-10}" x2="${x}" y2="${y+10}" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>`});
+ return g+"</svg>"}
+function panel(Z){const v=valence(Z),s=S[Z-1],io=ion(Z),nl=Z===1?1:(Z===2?0:8-v),dn=Z===1?0:(Z===2?1:(v-nl)/2);
+ const ionTxt=io?`${io.f} (${io.q>0?"perd "+io.q:"gagne "+(-io.q)} électron${Math.abs(io.q)>1?"s":""})<br><small style="font-weight:400">Configuration : ${confTxt(Z-io.q)}</small>`:(Z===2||Z===10||Z===18?"aucun : gaz noble, déjà stable":"pas d'ion simple : forme plutôt des liaisons");
+ document.getElementById("panel").innerHTML=`<div>${lewis(Z)}</div><dl><dt>Atome</dt><dd>${s} (Z = ${Z})</dd><dt>Configuration</dt><dd>${confTxt(Z)}</dd><dt>Électrons de valence</dt><dd>${v}</dd><dt>Ion stable</dt><dd>${ionTxt}</dd><dt>Liaisons possibles</dt><dd>${Z===2||Z===10||Z===18?"0 (couche saturée)":nl}</dd></dl>`;
+ document.querySelectorAll("#pt button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.z==Z))}
+const pt=document.getElementById("pt");
+S.forEach((s,i)=>{const Z=i+1,b=document.createElement("button");b.type="button";b.dataset.z=Z;b.dataset.f=fam(Z);b.innerHTML=`<small>${Z}</small>${s}`;b.setAttribute("aria-label",`${s}, numéro atomique ${Z}`);
+ b.style.gridRow=Z<=2?1:Z<=10?2:3;b.style.gridColumn=Z===1?1:Z===2?8:Z<=10?Z-2:Z-10;b.onclick=()=>panel(Z);pt.appendChild(b)});
+panel(7);
+
+/* Entraînement ions */
+(function(){const el=document.getElementById("ionTrain"),zs=[3,8,9,11,12,13,16,17];
+ let h=`<label>Élément : <select id="ionSel" style="font:inherit;padding:4px 8px;border-radius:6px">${zs.map(z=>`<option value="${z}">${S[z-1]} (Z = ${z})</option>`).join("")}</select></label><div class="opts" id="ionOpts" style="margin-top:8px"></div><div class="exp" id="ionFb" aria-live="polite"></div>`;
+ el.innerHTML=h;const sel=document.getElementById("ionSel");
+ function draw(){const Z=+sel.value,ok=ion(Z).f;let o=new Set([ok]);const s=S[Z-1];
+  ["+","2+","3+","−","2−","3−"].forEach(c=>{if(o.size<4)o.add(s+"<sup>"+c+"</sup>")});
+  const arr=[...o].sort(()=>Math.random()-.5);const box=document.getElementById("ionOpts");
+  box.innerHTML=arr.map(a=>`<button type="button" data-ok="${a===ok}">${a}</button>`).join("");document.getElementById("ionFb").textContent="";
+  box.querySelectorAll("button").forEach(b=>b.onclick=()=>{const good=b.dataset.ok==="true";
+   box.querySelectorAll("button").forEach(x=>{x.disabled=true;if(x.dataset.ok==="true")x.classList.add("ok")});if(!good)b.classList.add("bad");
+   const io=ion(Z);document.getElementById("ionFb").innerHTML=(good?"Bien joué. ":"Pas tout à fait. ")+`${s} a ${valence(Z)} électron(s) de valence : il ${io.q>0?"perd "+io.q:"gagne "+(-io.q)} électron(s) et prend la configuration ${confTxt(Z-io.q)}.`})}
+ sel.onchange=draw;draw()})();
+
+/* Quiz */
+const Q={
+"quiz-stab":[
+["Pourquoi les gaz nobles ne réagissent-ils pas ?",["Ils n'ont pas d'électrons","Leur couche externe est saturée","Ils sont trop lourds","Leur noyau est instable"],1,"Une couche externe saturée rend l'atome stable : il n'a aucune raison de former des ions ou des liaisons."],
+["Quelle règle l'atome d'hydrogène suit-il pour se stabiliser ?",["La règle de l'octet","La règle du duet","Aucune règle","La règle du triplet"],1,"H cherche à avoir 2 électrons sur sa couche externe, comme l'hélium."],
+["Combien de solutions un atome a-t-il pour ressembler à un gaz noble ?",["1 : former un ion","2 : former un ion ou des liaisons covalentes","3 : ion, liaison ou fusion","Aucune"],1,"Ion monoatomique ou liaisons covalentes."],
+["Combien d'électrons un atome stable (règle de l'octet) possède-t-il sur sa couche externe ?",["2","6","8","10"],2,"L'octet correspond à 8 électrons, comme Ne et Ar."]],
+"quiz-ions":[
+["Le sodium (Z = 11) forme l'ion :",["Na⁻","Na⁺","Na²⁺","Na²⁻"],1,"Na : 1s²2s²2p⁶3s¹. Il perd son électron de valence et devient Na⁺, comme Ne."],
+["Le chlore (Z = 17) forme l'ion :",["Cl⁺","Cl²⁺","Cl⁻","Cl²⁻"],2,"Cl a 7 électrons de valence : il gagne 1 électron pour atteindre 8 et ressembler à Ar."],
+["Le magnésium (Z = 12) forme l'ion :",["Mg⁺","Mg²⁺","Mg²⁻","Mg³⁺"],1,"Mg : 1s²2s²2p⁶3s². Il perd ses 2 électrons de valence."],
+["Quelle est la configuration de l'ion Al³⁺ (Z = 13) ?",["1s²2s²2p⁶3s²3p¹","1s²2s²2p⁶","1s²2s²2p⁶3s²3p⁶","1s²2s²2p⁶3s²"],1,"Al a 13 électrons ; Al³⁺ en a 10, soit la configuration du néon."],
+["Un anion est un atome qui a :",["perdu des électrons","gagné des électrons","gagné des protons","perdu des neutrons"],1,"Un anion a gagné au moins un électron : il est chargé négativement."]],
+"quiz-mol":[
+["Combien de liaisons covalentes l'oxygène forme-t-il ?",["1","2","3","4"],1,"O a 6 électrons de valence : 8 − 6 = 2 liaisons."],
+["Dans CH₄, combien de liaisons le carbone forme-t-il ?",["2","3","4","8"],2,"C a 4 électrons de valence : 8 − 4 = 4 liaisons."],
+["Une liaison covalente, c'est :",["un transfert d'un électron","la mise en commun d'un doublet d'électrons","une attraction entre ions","un électron célibataire"],1,"Chaque atome apporte un électron : le doublet est partagé."],
+["Combien de doublets non liants porte l'azote dans NH₃ ?",["0","1","2","3"],1,"N : 5 électrons de valence, 3 engagés dans les liaisons, 2 restent : 1 doublet non liant."],
+["Dans HCl, combien de doublets non liants porte le chlore ?",["1","2","3","4"],2,"Cl a 7 électrons de valence : 1 pour la liaison, 6 restants, soit 3 doublets."]],
+"quiz-lewis":[
+["Combien d'électrons de valence a le soufre (Z = 16) ?",["2","4","6","8"],2,"1s²2s²2p⁶3s²3p⁴ : 2 + 4 = 6 électrons sur la couche n = 3."],
+["Le schéma de Lewis du chlore montre :",["7 électrons célibataires","3 doublets et 1 électron célibataire","4 doublets","1 doublet et 5 célibataires"],1,"7 électrons de valence : 3 doublets (6 électrons) et 1 célibataire."],
+["Le carbone (4 électrons de valence) est représenté avec :",["2 doublets","4 électrons célibataires","1 doublet et 2 célibataires","aucun électron"],1,"Jusqu'à 4 électrons de valence, tous sont célibataires."],
+["Dans le schéma de Lewis de H₂O, l'oxygène porte :",["1 liaison, 3 doublets","2 liaisons, 2 doublets non liants","3 liaisons, 1 doublet non liant","4 liaisons"],1,"O forme 2 liaisons avec H et garde 2 doublets non liants : octet respecté."],
+["Combien d'électrons de valence au total faut-il placer dans CO₂ ?",["12","14","16","18"],2,"C : 4, et 2 × 6 pour les deux O : 4 + 12 = 16."]]
+};
+Object.entries(Q).forEach(([id,qs])=>{const box=document.getElementById(id);let done=0,good=0;
+ box.innerHTML=`<h3>Quiz</h3>`+qs.map((q,i)=>`<div class="q" data-i="${i}"><p>${i+1}. ${q[0]}</p><div class="opts">${q[1].map((o,j)=>`<button type="button" data-j="${j}">${o}</button>`).join("")}</div><div class="exp" aria-live="polite"></div></div>`).join("")+`<p class="score" aria-live="polite"></p>`;
+ box.addEventListener("click",e=>{const b=e.target.closest(".opts button");if(!b||b.disabled)return;const qd=b.closest(".q"),q=qs[qd.dataset.i],j=+b.dataset.j;
+  qd.querySelectorAll("button").forEach(x=>{x.disabled=true;if(+x.dataset.j===q[2])x.classList.add("ok")});
+  if(j===q[2])good++;else b.classList.add("bad");
+  qd.querySelector(".exp").textContent=(j===q[2]?"Correct. ":"Réponse : "+q[1][q[2]]+". ")+q[3];
+  if(++done===qs.length){const s=box.querySelector(".score");s.innerHTML=`Score : ${good} / ${qs.length}. <button type="button" class="theme" style="float:none" id="r-${id}">Recommencer</button>`;
+   document.getElementById("r-"+id).onclick=()=>{box.innerHTML="";location.reload()}}})});
+
+document.getElementById("themeBtn").onclick=()=>{const r=document.documentElement,d=matchMedia("(prefers-color-scheme:dark)").matches;
+ const cur=r.dataset.theme||(d?"dark":"light");r.dataset.theme=cur==="dark"?"light":"dark"};
+</script>
+</body>
+</html>
